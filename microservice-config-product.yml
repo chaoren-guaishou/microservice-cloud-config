@@ -11,7 +11,7 @@ mybatis:
 spring:
   profiles: dev # 开发环境
   application:
-    name: microservice-config-product
+    name: microservice-config-product-bus
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource     #数据源
     driver-class-name: com.mysql.cj.jdbc.Driver     #mysql驱动
