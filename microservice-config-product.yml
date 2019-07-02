@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    active: dev # 激活开发环境配置
+---
+server:
+  port: 8001 # 端口号
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件
+  type-aliases-package: com.bh.springcloud.entities   # 所有Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml      # mapper映射文件
+spring:
+  profiles: dev # 开发环境
+  application:
+    name: microservice-config-product
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource     #数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver     #mysql驱动
+    url: jdbc:mysql://127.0.0.1:3306/springcloud_db01?serverTimezone=GMT%2B8  # 数据库名称
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                   #数据库连接池最小维持连接数
+      initial-size: 5              #初始化连接数
+      max-idle: 5                  #最大连接数
+      max-wait-millis: 150        #等待连接获取的最大超时时间
+eureka:
+  client:
+    register-with-eureka: true   # 服务注册开关
+    fetch-registry: true         # 服务发现开关
+    service-url:                 # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
+      defaultZone: http://localhost:6001/eureka
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true    #  访问路径显示IP地址
+---
+server:
+  port: 8001 # 端口号
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件
+  type-aliases-package: com.bh.springcloud.entities   # 所有Entity别名类所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml      # mapper映射文件
+spring:
+  profiles: prod # 开发环境
+  application:
+    name: microservice-config-product
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource     #数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver     #mysql驱动
+    url: jdbc:mysql://127.0.0.1:3306/springcloud_db02?serverTimezone=GMT%2B8  # 数据库名称
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                   #数据库连接池最小维持连接数
+      initial-size: 5              #初始化连接数
+      max-idle: 5                  #最大连接数
+      max-wait-millis: 150        #等待连接获取的最大超时时间
+eureka:
+  client:
+    register-with-eureka: true   # 服务注册开关
+    fetch-registry: true         # 服务发现开关
+    service-url:                 # 注册到哪一个Eureka Server服务注册中心，多个中间用逗号分隔
+      defaultZone: http://localhost:6001/eureka
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true    #  访问路径显示IP地址
